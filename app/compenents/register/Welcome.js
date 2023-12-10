@@ -1,22 +1,30 @@
-import {StyleSheet, Text, View} from 'react-native'
-import React from 'react'
-
-
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
 export default function Welcome() {
-    return (
-        <View>
-            <Text style={styles.wel}>Welcome to our App</Text>
-        </View>
-    )
+  return (
+    <View style={styles.container}>
+      <Text style={styles.welcomeText}>Welcome to</Text>
+      <Text style={styles.appName}>Our App</Text>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    wel: {
-        fontSize: 20,
-        justifyContent: "center",
-        textAlign: 'center',
-        margin: 30,
-        fontWeight: 'bold',
-    }
-})
+  container: {
+    alignItems: 'center',
+    marginTop: 200, // Adjust the marginTop value to add more space at the top
+  },
+  welcomeText: {
+    fontSize: 18,
+    color: '#555',
+    textAlign: 'center',
+  },
+  appName: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#3498db',
+    textAlign: 'center',
+    marginTop: 10, // Adjust the marginTop value for spacing between texts
+  },
+});

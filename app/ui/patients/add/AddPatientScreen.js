@@ -127,11 +127,11 @@ const AddPatientScreen = ({navigation}) => {
                                    onChangeText={data => setBirthdate(data)}/>
                     </View>
 
-                    <View style={styles.containerInput}>
+                    {/* <View style={styles.containerInput}>
                         <TextInput style={styles.input} placeholder="Image URL"
                                    placeholderTextColor={colors.light}
                                    onChangeText={data => setImage(data)}/>
-                    </View>
+                    </View> */}
 
                 </KeyboardAvoidingView>
 
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
         flexDirection: "column", justifyContent: "center", alignItems: "center"
     },
     input: {
-        padding: 15, borderColor: "black", borderWidth: 1, fontSize: 18, borderRadius: 20,
+        padding: 15, borderColor: "#3498db", borderWidth: 1, fontSize: 18, borderRadius: 20,
     },
     label_value: {
         flexDirection: "row",

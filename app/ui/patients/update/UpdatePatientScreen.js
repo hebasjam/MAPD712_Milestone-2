@@ -84,27 +84,6 @@ const UpdatePatientScreen = ({route, navigation}) => {
                 <Text style={{margin: 16, flex: .6}}>{tests.item.type}</Text>
                 <Text style={{margin: 16, flex: .3}}>{tests.item.reading}</Text>
 
-                <IconButton style={{flex: .1}}
-                            icon="delete"
-                            iconColor={MD3Colors.error50}
-                            size={20}
-                            onPress={() => {
-
-
-                            }}
-                />
-
-                <IconButton
-                    icon={"pen"}
-                    iconColor={"#ca8a00"}
-                    size={20}
-                    onPress={() => {
-
-                        navigation.navigate('Update Record',
-                            {patient: patient, record: tests.item})
-
-                    }}
-                />
             </View>
         </TouchableOpacity>
 
@@ -183,21 +162,7 @@ const UpdatePatientScreen = ({route, navigation}) => {
                 <View style={{flex: .5}}>
                     <Text style={styles.title_text}>Records : </Text>
                 </View>
-                <View style={{flex: .5, margin: 16}}>
-                    <Button
-                        title="Create Record"
-
-                        onPress={
-                            () => {
-                                navigation.navigate(
-                                    'Add Record',
-                                    {patient: patient}
-                                )
-                            }
-
-                        }
-                    />
-                </View>
+               
             </View>
             <View style={{marginHorizontal: 16, flexDirection: "row"}}>
                 <Text style={{flex: .6, flexDirection: "row"}}>Record Type</Text>
@@ -310,6 +275,13 @@ const styles = StyleSheet.create({
         width: 150,
         padding: 3, borderColor: "black", borderWidth: 1, fontSize: 14, borderRadius: 8,
     },
+    label_text: {
+        marginStart: 8,
+        color: "#000",
+        fontSize: 16, // Adjust the font size as needed
+        fontWeight: "bold", // Adjust the font weight as needed
+        paddingLeft: 40, // Add left padding here
+      },
 
 });
 export default UpdatePatientScreen

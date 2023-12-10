@@ -229,35 +229,6 @@ const PatientsScreen = ({navigation}) => {
             ]}>
 
 
-                <View style={{flexDirection: "row"}}>
-
-
-                    <View style={{flex: 0.9,}}>
-                        <SearchBar
-                            inputStyle={{backgroundColor: isOpen ? "rgba(221,221,221,0.55)" : "white"}}
-                            containerStyle={{
-                                backgroundColor: isOpen ? "rgba(221,221,221,0.55)" : "white",
-                                borderWidth: 1, borderRadius: 5}}
-                            inputContainerStyle={{backgroundColor: isOpen ? "rgba(221,221,221,0.55)" : "white"}}
-                            placeholderTextColor={'#g5g5g5'}
-                            round={true}
-                            lightTheme={true}
-                            placeholder="Search..."
-                            autoCapitalize='none'
-                            autoCorrect={false}
-                            onChangeText={search}
-                            value={searchText}
-                        />
-                    </View>
-                    <View style={{flex: 0.2}}>
-
-                        <IconButton
-                            icon={"filter"} iconColor={isOpen ? "#0582b9" : "#333333"} size={40}
-                            onPress={handlePresentFilter}
-                        />
-                    </View>
-
-                </View>
 
                 <View>
                     <FlatList
@@ -351,6 +322,10 @@ const styles = StyleSheet.create({
         height: 50,
         margin: 8
     },
+
+
+
+    /////////
     card: {
         flexDirection: "row",
         margin: 8,
@@ -372,7 +347,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     criticalStatus: {
-        backgroundColor: '#920000',
+        backgroundColor: 'red',
         alignContent: 'center',
         color: '#fff',
         marginEnd: 10,
@@ -381,7 +356,7 @@ const styles = StyleSheet.create({
         paddingVertical: 5
     },
     normalStatus: {
-        backgroundColor: '#089200',
+        backgroundColor: 'green',
         alignContent: 'center',
         color: '#fff',
         marginEnd: 10,

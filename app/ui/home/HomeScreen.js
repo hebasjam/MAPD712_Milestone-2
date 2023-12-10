@@ -1,187 +1,114 @@
-import {Button, FlatList, Image, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native';
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from 'react';
+import { View, StyleSheet, Text, TouchableOpacity, FlatList } from 'react-native';
 
+const HomeScreen = ({ navigation }) => {
+  const [data, setData] = useState([]);
 
-const HomeScreen = ({navigation}) => {
-
-
-    const [data, setData] = React.useState([])
-
-
-    useEffect(() => {
-        fetchUsersData()
-        console.log("test", data)
-
-    }, [])
-
-
+  useEffect(() => {
     const fetchUsersData = async () => {
-        fetch("https://21e4390f-5866-4b0e-90a3-b9adf27d1f32.mock.pstmn.io/patients")
-            .then(response => response.json())
-            .then((jsonResponse) => {
-                setData(jsonResponse)
-            })
-            .catch(error => console.log("error", error))
-    }
+      try {
+        const response = await fetch("https://21e4390f-5866-4b0e-90a3-b9adf27d1f32.mock.pstmn.io/patients");
+        const jsonResponse = await response.json();
+        setData(jsonResponse);
+      } catch (error) {
+        console.log("Error fetching data:", error);
+      }
+    };
 
+    fetchUsersData();
+  }, []);
 
-    const renderAppointmentItem = (data) =>
-        <TouchableOpacity>
-            <View style={styles.card}>
-                <Image
-                    style={styles.tinyLogo}
-                    source={{
-                        uri: data.item.url + '' + new Date().getTime(),
-                    }}/>
-                <Text style={styles.name}>{data.item.name}</Text>
-                <Text style={styles.date}>"11:00 AM"</Text>
+  const renderAppointmentItem = ({ item }) => (
+    <TouchableOpacity style={styles.card} onPress={() => handleAppointmentPress(item)}>
+      <Text style={styles.name}>{item.name}</Text>
+      <Text style={styles.date}>{"11:00 AM"}</Text>
+    </TouchableOpacity>
+  );
 
-            </View>
-        </TouchableOpacity>
+  const handleAppointmentPress = (appointment) => {
+    // Handle the press event (e.g., navigate to appointment details)
+    console.log('Appointment Pressed:', appointment);
+  };
 
-    const renderExploreItem = (data) =>
+  return (
+    <View style={styles.container}>
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerText}>Hello,</Text>
+        <Text style={[styles.headerText, styles.boldText]}> Dr Jane!</Text>
+      </View>
 
-        <TouchableOpacity>
-            <View style={styles.cardExolore}>
-                <Text style={styles.name}>{data.item.name}</Text>
-                <Button title={'click me'} onPress={() => navigation.navigate('WelcomeScreen')}/>
+      <Text style={styles.sectionTitle}>Today's Appointments</Text>
 
-            </View>
-        </TouchableOpacity>
-
-
-    return (
-        <View style={{}}>
-
-            <View style={styles.tv_view_welcone}>
-                <Text style={styles.tv_welcome}>Hello, </Text>
-                <Text style={styles.tv_name}>Dr Alexander!</Text>
-            </View>
-
-            <TextInput
-                style={styles.input}
-                placeholder="Search For ..."
-                inlineImageLeft="search_icon"
-            />
-
-
-            <Text style={styles.section_title}>Today Appointment</Text>
-
-            <View>
-
-                <FlatList
-                    horizontal={true}
-                    data={data}
-                    keyExtractor={item => item.id.toString()}
-                    renderItem={item => renderAppointmentItem(item)}
-                />
-            </View>
-
-            <Text style={styles.section_title}>Explore</Text>
-
-
-            <View>
-                <FlatList
-                    horizontal={true}
-                    data={data}
-                    keyExtractor={item => item.id.toString()}
-                    renderItem={item => renderExploreItem(item)}
-                />
-            </View>
-
-            {/*<Text*/}
-            {/*    onPress={() => alert('This is the "Home" screen.')}*/}
-            {/*    style={{ fontSize: 26, fontWeight: 'bold' }}>Home Screen</Text>*/}
-        </View>
-
-
-    );
-}
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={renderAppointmentItem}
+        contentContainerStyle={styles.listContainer}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-
-    input: {
-        margin: 12,
-        borderWidth: 1,
-        padding: 10,
-        borderRadius: 20,
-        borderColor: "black",
-        flexDirection: "column",
-        justifyContent: "center", alignItems: "center",
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
+    paddingTop: 40,
+  },
+  headerContainer: {
+    flexDirection: 'row',
+    marginBottom: 20,
+  },
+  headerText: {
+    fontSize: 24,
+    color: '#0582b9',
+  },
+  boldText: {
+    fontWeight: 'bold',
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#012433',
+    marginBottom: 20,
+  },
+  listContainer: {
+    paddingBottom: 20,
+  },
+  card: {
+    flexDirection: 'column',
+    margin: 8,
+    backgroundColor: 'white',
+    alignItems: 'left',
+    width: '100%',
+    height: 70,
+    textAlign: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 1,
+      height: 2,
     },
-    tv_view_welcone: {
-        marginTop: 30,
-        marginBottom: 20,
-        marginStart: 8
-    },
-    tv_welcome: {
-        fontSize: 20,
-        color: '#0582b9'
-    },
-    tv_name: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        color: '#065171'
-    }, section_title: {
-        fontSize: 15,
-        fontWeight: 'bold',
-        marginStart: 8,
-        marginTop: 40,
-        color: '#012433'
-
-    }, card: {
-        flexDirection: "column",
-        margin: 8,
-        backgroundColor: 'white',
-        alignItems: "center",
-        width: 150,
-        height: 120,
-        textAlign: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 1,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-    cardExolore: {
-        flexDirection: "column",
-        padding: 10,
-        margin: 8,
-        backgroundColor: 'white',
-        alignItems: "center",
-        textAlign: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 1,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-
-    tinyLogo: {
-        width: 50,
-        height: 50,
-        margin: 8
-    }, name: {
-        marginStart: 8,
-    },
-    date: {
-        marginTop: 8,
-        width: "100%",
-        backgroundColor: '#0582b9',
-        color: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center'
-
-    }
-
-
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    borderRadius: 10,
+    padding: 15, // Adjust padding as needed
+    borderWidth: 1,
+    borderColor: '#ddd',
+  },
+  name: {
+    marginVertical: 4, // Adjust margin as needed
+  
+  },
+  date: {
+    marginTop: 4,
+    width: '100%',
+    backgroundColor: '#0582b9',
+    color: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
-
-export default HomeScreen
+export default HomeScreen;
