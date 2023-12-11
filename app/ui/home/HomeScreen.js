@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     margin: 8,
     backgroundColor: 'white',
-    alignItems: 'left',
+    alignItems: 'center',
     width: '100%',
     height: 70,
     textAlign: 'center',
