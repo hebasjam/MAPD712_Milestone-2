@@ -242,7 +242,7 @@ const styles = StyleSheet.create({
         fontSize: 30
     },
     criticalStatus: {
-        backgroundColor: '#920000',
+        backgroundColor: 'red',
         alignContent: 'center',
         color: '#fff',
         marginEnd: 10,
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
         paddingVertical: 5
     },
     normalStatus: {
-        backgroundColor: '#089200',
+        backgroundColor: 'green',
         alignContent: 'center',
         color: '#fff',
         marginEnd: 10,
